@@ -24,6 +24,8 @@ func main() {
 		addSite()
 	case "remove":
 		removeSite()
+	case "list":
+		listSites()
 	default:
 		handleUnknown()
 	}
@@ -47,6 +49,14 @@ func addSite() {
 	sites.Add(os.Args[2])
 }
 
+func listSites() {
+	sites := sites.GetAll()
+
+	for _, site := range sites {
+		fmt.Println(site)
+	}
+}
+
 func checkStatuses() {
 	sites := sites.GetAll()
 	c := make(chan struct{})
@@ -61,6 +71,6 @@ func checkStatuses() {
 }
 
 func handleUnknown() {
-	msg := fmt.Sprintf("Unknown command: %s. Available commands: run, add", os.Args[1])
+	msg := fmt.Sprintf("Unknown command: %s. Available commands: run, add, remove, list", os.Args[1])
 	fmt.Println(msg)
 }
