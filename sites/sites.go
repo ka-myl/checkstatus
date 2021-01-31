@@ -7,7 +7,7 @@ import (
 	"strings"
 )
 
-var sitesFile = "E:\\DEV\\checkstatus\\sites.txt"
+var sitesFile = strings.Replace(os.Args[0], "checkstatus.exe", "sites.txt", 1)
 
 func checkErr(e error, msg string) {
 	if e != nil {
