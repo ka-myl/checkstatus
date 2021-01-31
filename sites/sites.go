@@ -50,6 +50,25 @@ func Add(url string) {
 	checkErr(writeErr, "Error while writing site to the list")
 }
 
+// Remove delets the provided url from the sites list
+func Remove(url string) {
+	data, err := ioutil.ReadFile(sitesFile)
+	checkErr(err, "Error while removing site from the list")
+
+	lines := strings.Fields(string(data))
+	var filtered []string
+
+	for _, line := range lines {
+		if strings.Index(line, url) == -1 {
+			filtered = append(filtered, line)
+		}
+	}
+
+	newContent := strings.Join(filtered, "\n")
+	writeErr := ioutil.WriteFile(sitesFile, []byte(newContent), 0644)
+	checkErr(writeErr, "Error while saving updated list after removal")
+}
+
 func createDefault() []byte {
 	data := []byte("http://google.com\n")
 	err := ioutil.WriteFile(sitesFile, data, 0644)

@@ -22,14 +22,25 @@ func main() {
 		checkStatuses()
 	case "add":
 		addSite()
+	case "remove":
+		removeSite()
 	default:
 		handleUnknown()
 	}
 }
 
+func removeSite() {
+	if len(os.Args) < 3 {
+		fmt.Println("Missing argument. Usage: checkstatus remove [url]")
+		return
+	}
+
+	sites.Remove(os.Args[2])
+}
+
 func addSite() {
 	if len(os.Args) < 3 {
-		fmt.Printf("Missing argument. Usage: checkstatus add [url]")
+		fmt.Println("Missing argument. Usage: checkstatus add [url]")
 		return
 	}
 
