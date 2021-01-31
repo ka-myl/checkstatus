@@ -64,7 +64,7 @@ func Remove(url string) {
 		}
 	}
 
-	newContent := strings.Join(filtered, "\n")
+	newContent := strings.Join(filtered, "\n") + "\n"
 	writeErr := ioutil.WriteFile(sitesFile, []byte(newContent), 0644)
 	checkErr(writeErr, "Error while saving updated list after removal")
 }
