@@ -2,7 +2,7 @@ package main
 
 import (
 	"checkstatus/sites"
-	"fmt"
+	"checkstatus/status"
 )
 
 var colorRed = "\033[31m"
@@ -13,17 +13,6 @@ func main() {
 	sites := sites.GetSitesList()
 
 	for _, site := range sites {
-		fmt.Println(site)
+		status.Check(site)
 	}
 }
-
-// func checkSiteStatus(url string) {
-// 	res, err := http.Get(url)
-
-// 	if err != nil {
-// 		fmt.Println(url, colorRed, "DOWN", colorReset)
-// 		return
-// 	}
-
-// 	fmt.Println(url, colorGreen, res.Status, colorReset)
-// }
