@@ -10,9 +10,14 @@ var colorGreen = "\033[32m"
 var colorReset = "\033[0m"
 
 func main() {
-	sites := sites.GetSitesList()
+	sites := sites.GetAll()
+	c := make(chan struct{})
 
 	for _, site := range sites {
-		status.Check(site)
+		go status.Check(site, c)
+	}
+
+	for i := 0; i < len(sites); i++ {
+		<-c
 	}
 }

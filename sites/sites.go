@@ -17,8 +17,8 @@ func checkErr(e error, msg string) {
 	}
 }
 
-// GetSitesList returns a list of sites that should be checked for status
-func GetSitesList() []string {
+// GetAll returns a list of sites that should be checked for status
+func GetAll() []string {
 	content, err := ioutil.ReadFile(sitesFile)
 
 	if err != nil {
